@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 
+    =================================================================================
+    TECHNEST E-COMMERCE WEBSITE
+    =================================================================================
+    This is a complete single-file e-commerce landing page for "TechNest" — a fictional
+    tech gadgets store. Everything (HTML, CSS, JavaScript) is self-contained in one file
+    so it runs anywhere without build tools or dependencies.
+
+    DESIGN INSPIRATION:
+    - Dark, premium aesthetic with high-contrast white text on dark backgrounds
+    - Vibrant green (#4CAF50 style) as the primary call-to-action color
+    - Clean card-based product grid with subtle shadows and hover lift effects
+    - Fully responsive from mobile (320px) to desktop (1440px+)
+    =================================================================================
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechNest — Top Tech Gear for Your Lifestyle</title>
+
+  <!-- 
+    GOOGLE FONTS: Inter for clean, modern UI typography. 
+    We load weights 400 (regular) and 500 (medium) to keep it lightweight.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Webstore.css">
+</head>
+<body>
+
+  <!-- =================================================================================
+       MOBILE NAVIGATION OVERLAY
+       =================================================================================
+       This full-screen menu appears on mobile when the hamburger icon is tapped.
+       It sits at a high z-index above all content. The "active" class is toggled
+       via JavaScript to show/hide it with a fade transition.
+       ================================================================================= -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" onclick="toggleMenu()" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <a href="#featured" onclick="toggleMenu()">Shop</a>
+    <a href="new-arrivals.html" onclick="toggleMenu()">New Arrivals</a>
+    <a href="best-sellers.html" onclick="toggleMenu()">Best Sellers</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <!-- =================================================================================
+       NAVIGATION BAR
+       =================================================================================
+       Sticky header that remains visible while scrolling.
+       Uses semantic <nav> for accessibility (screen readers identify it as navigation).
+       ================================================================================= -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar-inner">
+      <!-- Logo: clickable link that scrolls to top -->
+      <a href="technest-store.html" class="logo" aria-label="TechNest Home">
+        <div class="logo-icon">
+          <!-- Simple "layers" SVG icon representing tech/stack -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        TechNest
+      </a>
+
+      <!-- Desktop navigation links: hidden on mobile via CSS -->
+      <div class="nav-links">
+        <a href="technest-store.html">Home</a>
+        <a href="#featured">Shop</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <!-- Right-side icons: search and shopping cart -->
+      <div class="nav-icons">
+        <!-- Search icon button -->
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Cart icon with dynamic badge showing item count -->
+        <button class="nav-icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <!-- Cart item count badge -->
+          <span class="cart-badge" id="cartBadge">2</span>
+        </button>
+
+        <!-- Hamburger menu toggle (mobile only) -->
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+<!-- =================================================================================
+       HERO SECTION
+       =================================================================================
+       The main visual hook of the page. Split into text (left) and image (right).
+       The image is a composite of tech gadgets: headphones, smartwatch, and speaker.
+       ================================================================================= -->
+  <section class="hero" id="shop">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">Top Tech Gear for Your Lifestyle</h1>
+        <p class="hero-subtitle">Explore the latest gadgets &amp; accessories designed to elevate your everyday experience.</p>
+        <a href="#featured" class="btn-primary">Shop Now</a>
+      </div>
+      <div class="hero-image">
+        <!-- Hero slideshow: cycles through ads for phones & gadgets -->
+        <div class="hero-slider" id="heroSlider">
+          <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=800&q=80"
+                 alt="Smartphone ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80"
+                 alt="Headphones ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80"
+                 alt="Wireless speaker ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"
+                 alt="Smartwatch ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80"
+                 alt="Laptop ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80"
+                 alt="Gaming controller ad" loading="lazy">
+          </div>
+          <button class="slide-arrow prev" onclick="heroSlide(-1)" aria-label="Previous slide">&#10094;</button>
+          <button class="slide-arrow next" onclick="heroSlide(1)" aria-label="Next slide">&#10095;</button>
+          <div class="slide-dots" id="heroDots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       TRUST BADGES BAR
+       =================================================================================
+       Three value propositions displayed horizontally to build customer confidence
+       before they reach the product listings.
+       ================================================================================= -->
+  <section class="trust-bar" aria-label="Store guarantees">
+    <div class="container trust-grid">
+      <!-- Badge 1: Free Shipping -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span><strong>Free Shipping</strong> on Orders Over $50</span>
+      </div>
+
+      <!-- Badge 2: Money Back Guarantee -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span><strong>30-Day</strong> Money Back Guarantee</span>
+      </div>
+
+      <!-- Badge 3: Customer Support -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span><strong>24/7</strong> Customer Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       FULL SHOP / CATALOG SECTION
+       =================================================================================
+       Segmented catalog with category filter chips and infinite scroll.
+       ================================================================================= -->
+  <section class="featured" id="featured">
+    <div class="container">
+      <h2 class="section-title">Shop All</h2>
+
+      <div class="category-bar" id="categoryBar">
+        <button class="cat-chip active" data-cat="All" onclick="setCategory('All')">All</button>
+        <button class="cat-chip" data-cat="Phones" onclick="setCategory('Phones')">Phones</button>
+        <button class="cat-chip" data-cat="Headsets" onclick="setCategory('Headsets')">Headsets</button>
+        <button class="cat-chip" data-cat="Earpods &amp; Buds" onclick="setCategory('Earpods & Buds')">Earpods &amp; Buds</button>
+        <button class="cat-chip" data-cat="Gaming" onclick="setCategory('Gaming')">Gaming</button>
+        <button class="cat-chip" data-cat="PC Parts" onclick="setCategory('PC Parts')">PC Parts</button>
+        <button class="cat-chip" data-cat="Accessories" onclick="setCategory('Accessories')">Accessories</button>
+        <button class="cat-chip" data-cat="Cameras" onclick="setCategory('Cameras')">Cameras</button>
+        <button class="cat-chip" data-cat="Smart Home" onclick="setCategory('Smart Home')">Smart Home</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <p class="grid-status">Loading products&hellip;</p>
+      </div>
+      <div class="grid-status" id="scrollStatus"></div>
+    </div>
+  </section>
+
+  <script src="webstore.js"></script>
+  <script>
+    // Stock status threshold: >=10 In Stock, 1-9 Low Stock, 0 Out of Stock
+    function productStatus(stock) {
+      if (stock <= 0) {
+        return { label: 'Out of Stock', cls: 'stock-out' };
+      }
+      if (stock < 10) {
+        return { label: 'Low Stock', cls: 'stock-low' };
+      }
+      return { label: 'In Stock', cls: 'stock-in' };
+    }
+
+    // =================================================================================
+    // SEGMENTED CATALOG + INFINITE SCROLL
+    // =================================================================================
+    const PAGE_SIZE = 12;
+    let allProducts = [];
+    let currentCategory = 'All';
+    let renderedCount = 0;
+    let isLoading = false;
+    let doneLoading = false;
+
+    function productCard(product) {
+      const status = productStatus(Number(product.stock) || 0);
+      const price = '$' + (Number(product.price) || 0).toFixed(2);
+      const image = product.image
+        ? '<img src="' + product.image + '" alt="' + (product.name || 'Product') + '">'
+        : '<div class="placeholder-img"></div>';
+      const disabled = status.cls === 'stock-out' ? 'disabled' : '';
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<div class="product-image-wrap">' +
+          '<span class="badge ' + status.cls + '">' + status.label + '</span>' +
+          image +
+        '</div>' +
+        '<h3 class="product-name">' + (product.name || 'Product') + '</h3>' +
+        '<div class="product-category">' + (product.category || '') + '</div>' +
+        '<div class="product-price">' + price + '</div>' +
+        '<button class="btn-primary" onclick="guardToCheckout()" ' + disabled + '>Shop Now</button>';
+      return card;
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-chip').forEach(chip => {
+        chip.classList.toggle('active', chip.dataset.cat === cat);
+      });
+      renderedCount = 0;
+      doneLoading = false;
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      document.getElementById('scrollStatus').textContent = '';
+      loadMore();
+    }
+
+    function loadMore() {
+      if (isLoading || doneLoading) return;
+      const grid = document.getElementById('productsGrid');
+      const statusEl = document.getElementById('scrollStatus');
+      const list = currentCategory === 'All'
+        ? allProducts
+        : allProducts.filter(p => (p.category || '') === currentCategory);
+      const slice = list.slice(renderedCount, renderedCount + PAGE_SIZE);
+      if (!slice.length) {
+        doneLoading = true;
+        statusEl.textContent = list.length ? '' : (allProducts.length ? 'No products in this category yet.' : 'No products available yet.');
+        return;
+      }
+      isLoading = true;
+      slice.forEach(p => grid.appendChild(productCard(p)));
+      renderedCount += slice.length;
+      isLoading = false;
+      if (renderedCount >= list.length) {
+        doneLoading = true;
+        statusEl.textContent = '';
+      }
+    }
+
+    function handleScroll() {
+      if (document.documentElement.scrollHeight - window.innerHeight - window.scrollY < 300) {
+        loadMore();
+      }
+    }
+
+    async function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      try {
+        const res = await fetch('/api/products');
+        if (!res.ok) throw new Error('Failed to load products');
+        allProducts = await res.json();
+        grid.innerHTML = '';
+        loadMore();
+      } catch (err) {
+        grid.innerHTML = '<p class="grid-status">Could not load products. Please try again later.</p>';
+        console.error('loadProducts', err);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    async function guardToCheckout() {
+      try {
+        const res = await fetch('/api/customer/me');
+        if (res.ok) {
+          window.location.href = 'shop.html';
+        } else {
+          window.location.href = 'customer-signup.html';
+        }
+      } catch (err) {
+        window.location.href = 'customer-signup.html';
+      }
+    }
+
+    // =================================================================================
+    // HERO SLIDESHOW
+    // =================================================================================
+    let heroIndex = 0;
+    let heroTimer = null;
+    const heroSlides = () => document.querySelectorAll('#heroSlider .slide');
+
+    function showSlide(i) {
+      const slides = heroSlides();
+      if (!slides.length) return;
+      const total = slides.length;
+      heroIndex = (i + total) % total;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === heroIndex));
+      const dots = document.querySelectorAll('#heroSlider .slide-dot');
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === heroIndex));
+    }
+
+    function heroSlide(dir) {
+      showSlide(heroIndex + dir);
+      resetHeroTimer();
+    }
+
+    function resetHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(() => showSlide(heroIndex + 1), 4000);
+    }
+
+    (function initHero() {
+      const slider = document.getElementById('heroSlider');
+      if (!slider) return;
+      const slides = heroSlides();
+      if (!slides.length) return;
+      const dotsWrap = document.getElementById('heroDots');
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = 'slide-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + (idx + 1));
+        dot.onclick = () => { showSlide(idx); resetHeroTimer(); };
+        dotsWrap.appendChild(dot);
+      });
+      showSlide(0);
+      resetHeroTimer();
+    })();
+
+    loadProducts();
+  </script>
+</body>
+</html>

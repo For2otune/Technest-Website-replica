@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 
+    =================================================================================
+    TECHNEST E-COMMERCE WEBSITE
+    =================================================================================
+    This is a complete single-file e-commerce landing page for "TechNest" — a fictional
+    tech gadgets store. Everything (HTML, CSS, JavaScript) is self-contained in one file
+    so it runs anywhere without build tools or dependencies.
+
+    DESIGN INSPIRATION:
+    - Dark, premium aesthetic with high-contrast white text on dark backgrounds
+    - Vibrant green (#4CAF50 style) as the primary call-to-action color
+    - Clean card-based product grid with subtle shadows and hover lift effects
+    - Fully responsive from mobile (320px) to desktop (1440px+)
+    =================================================================================
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechNest — Top Tech Gear for Your Lifestyle</title>
+
+  <!-- 
+    GOOGLE FONTS: Inter for clean, modern UI typography. 
+    We load weights 400 (regular) and 500 (medium) to keep it lightweight.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Webstore.css">
+</head>
+<body>
+
+  <!-- =================================================================================
+       MOBILE NAVIGATION OVERLAY
+       =================================================================================
+       This full-screen menu appears on mobile when the hamburger icon is tapped.
+       It sits at a high z-index above all content. The "active" class is toggled
+       via JavaScript to show/hide it with a fade transition.
+       ================================================================================= -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" onclick="toggleMenu()" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <a href="shop.html" onclick="toggleMenu()">Shop</a>
+    <a href="new-arrivals.html" onclick="toggleMenu()">New Arrivals</a>
+    <a href="best-sellers.html" onclick="toggleMenu()">Best Sellers</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <!-- =================================================================================
+       NAVIGATION BAR
+       =================================================================================
+       Sticky header that remains visible while scrolling.
+       Uses semantic <nav> for accessibility (screen readers identify it as navigation).
+       ================================================================================= -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar-inner">
+      <!-- Logo: clickable link that scrolls to top -->
+      <a href="#" class="logo" aria-label="TechNest Home">
+        <div class="logo-icon">
+          <!-- Simple "layers" SVG icon representing tech/stack -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        TechNest
+      </a>
+
+      <!-- Desktop navigation links: hidden on mobile via CSS -->
+      <div class="nav-links">
+        <a href="shop.html">Shop</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <!-- Right-side icons: search and shopping cart -->
+      <div class="nav-icons">
+        <!-- Search icon button -->
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Cart icon with dynamic badge showing item count -->
+        <button class="nav-icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <!-- Cart item count badge -->
+          <span class="cart-badge" id="cartBadge">2</span>
+        </button>
+
+        <!-- Hamburger menu toggle (mobile only) -->
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =================================================================================
+       HERO SECTION
+       =================================================================================
+       The main visual hook of the page. Split into text (left) and image (right).
+       The image is a composite of tech gadgets: headphones, smartwatch, and speaker.
+       ================================================================================= -->
+  <section class="hero" id="shop">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-title">Top Tech Gear for Your Lifestyle</h1>
+        <p class="hero-subtitle">Explore the latest gadgets &amp; accessories designed to elevate your everyday experience.</p>
+        <a href="shop.html" class="btn-primary">Shop Now</a>
+      </div>
+      <div class="hero-image">
+        <!-- Hero slideshow: cycles through ads for phones & gadgets -->
+        <div class="hero-slider" id="heroSlider">
+          <div class="slide active">
+            <img src="https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=800&q=80"
+                 alt="Smartphone ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80"
+                 alt="Headphones ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80"
+                 alt="Wireless speaker ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80"
+                 alt="Smartwatch ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80"
+                 alt="Laptop ad" loading="lazy">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80"
+                 alt="Gaming controller ad" loading="lazy">
+          </div>
+          <button class="slide-arrow prev" onclick="heroSlide(-1)" aria-label="Previous slide">&#10094;</button>
+          <button class="slide-arrow next" onclick="heroSlide(1)" aria-label="Next slide">&#10095;</button>
+          <div class="slide-dots" id="heroDots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       TRUST BADGES BAR
+       =================================================================================
+       Three value propositions displayed horizontally to build customer confidence
+       before they reach the product listings.
+       ================================================================================= -->
+  <section class="trust-bar" aria-label="Store guarantees">
+    <div class="container trust-grid">
+      <!-- Badge 1: Free Shipping -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span><strong>Free Shipping</strong> on Orders Over $50</span>
+      </div>
+
+      <!-- Badge 2: Money Back Guarantee -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span><strong>30-Day</strong> Money Back Guarantee</span>
+      </div>
+
+      <!-- Badge 3: Customer Support -->
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        <span><strong>24/7</strong> Customer Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       FEATURED PRODUCTS SECTION
+       =================================================================================
+       A 4-card grid showcasing the store's highlighted items.
+       Each card is a self-contained product teaser with image, badge, name, price, and CTA.
+       ================================================================================= -->
+  <section class="featured" id="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+
+      <div class="products-grid" id="productsGrid">
+        <p class="grid-status">Loading products&hellip;</p>
+      </div>
+
+      <div class="see-more-wrap">
+        <a href="shop.html" class="btn-primary">See More Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       PRODUCTIVITY PROMO BANNER
+       =================================================================================
+       A wide dark banner promoting work/play accessories.
+       Features a background workspace image with a gradient overlay for text contrast.
+       ================================================================================= -->
+  <section class="productivity" id="about">
+    <!-- Background image: clean desk setup with keyboard and mouse -->
+    <img class="productivity-bg" 
+         src="https://images.unsplash.com/photo-1595225476474-87563907a212?w=1200&q=80" 
+         alt="Minimalist desk setup with mechanical keyboard and mouse">
+
+    <div class="productivity-content">
+      <h2 class="productivity-title">Boost Your Productivity</h2>
+      <p class="productivity-desc">Essential accessories for work &amp; play. Upgrade your workspace with premium peripherals.</p>
+      <a href="#" class="btn-primary">Browse Now</a>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       TWO-COLUMN PROMO SECTION
+       =================================================================================
+       Side-by-side promotional cards for "New Arrivals" and "Best Sellers".
+       Each uses a background image with a bottom gradient so the white CTA button pops.
+       ================================================================================= -->
+  <section class="promo-section">
+    <div class="container promo-grid">
+      <!-- New Arrivals Card -->
+      <div class="promo-card" id="new">
+        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=600&q=80" 
+             alt="VR headset and tech accessories on dark background">
+        <div class="promo-content">
+          <h3 class="promo-title">New Arrivals</h3>
+          <a href="new-arrivals.html" class="btn-primary">Shop New</a>
+        </div>
+      </div>
+
+      <!-- Best Sellers Card -->
+      <div class="promo-card" id="best">
+        <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&q=80" 
+             alt="Premium over-ear headphones on wooden surface">
+        <div class="promo-content">
+          <h3 class="promo-title">Best Sellers</h3>
+          <a href="best-sellers.html" class="btn-primary">Shop Bestsellers</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       NEWSLETTER SECTION
+       =================================================================================
+       Email capture form in the footer area. Uses a flex row with an input and button
+       joined together (no gap between them) for a seamless "input group" look.
+       ================================================================================= -->
+  <section class="newsletter" id="contact">
+    <div class="container newsletter-inner">
+      <div class="newsletter-text">
+        <h3>Join Our Newsletter</h3>
+        <p>Get the latest deals &amp; updates delivered to your inbox.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- =================================================================================
+       FOOTER
+       =================================================================================
+       Multi-column layout with navigation links, customer service info, social links,
+       and a copyright notice. Uses semantic <footer> element.
+       ================================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Column 1: Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Customer Service -->
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Legal -->
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Social + Brand -->
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <!-- Facebook -->
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <!-- Twitter/X -->
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <!-- GitHub -->
+            <a href="#" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright bar -->
+      <div class="footer-bottom">
+        <p>&copy; 2024 TechNest. All Rights Reserved. Powered by Shopify.</p>
+        <p>Designed with precision.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="webstore.js"></script>
+  <script>
+    function productStatus(stock) {
+      if (stock <= 0) return { label: 'Out of Stock', cls: 'stock-out' };
+      if (stock < 10) return { label: 'Low Stock', cls: 'stock-low' };
+      return { label: 'In Stock', cls: 'stock-in' };
+    }
+
+    function productCard(product) {
+      const status = productStatus(Number(product.stock) || 0);
+      const price = '$' + (Number(product.price) || 0).toFixed(2);
+      const image = product.image
+        ? '<img src="' + product.image + '" alt="' + (product.name || 'Product') + '">'
+        : '<div class="placeholder-img"></div>';
+      const disabled = status.cls === 'stock-out' ? 'disabled' : '';
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<div class="product-image-wrap">' +
+          '<span class="badge ' + status.cls + '">' + status.label + '</span>' +
+          image +
+        '</div>' +
+        '<h3 class="product-name">' + (product.name || 'Product') + '</h3>' +
+        '<div class="product-price">' + price + '</div>' +
+        '<button class="btn-primary" onclick="guardToCheckout()" ' + disabled + '>Shop Now</button>';
+      return card;
+    }
+
+    async function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      try {
+        const res = await fetch('/api/products');
+        if (!res.ok) throw new Error('Failed to load products');
+        const products = await res.json();
+        grid.innerHTML = '';
+        if (!products.length) {
+          grid.innerHTML = '<p class="grid-status">No products available yet.</p>';
+          return;
+        }
+        // Show a hand-picked selection of 4 best sellers
+        const best = products.filter(p => Number(p.is_bestseller) === 1);
+        const picked = (best.length ? best : products).slice(0, 4);
+        picked.forEach(p => grid.appendChild(productCard(p)));
+      } catch (err) {
+        grid.innerHTML = '<p class="grid-status">Could not load products. Please try again later.</p>';
+        console.error('loadProducts', err);
+      }
+    }
+
+    async function guardToCheckout() {
+      try {
+        const res = await fetch('/api/customer/me');
+        if (res.ok) {
+          window.location.href = 'shop.html';
+        } else {
+          window.location.href = 'customer-signup.html';
+        }
+      } catch (err) {
+        window.location.href = 'customer-signup.html';
+      }
+    }
+
+    // =================================================================================
+    // HERO SLIDESHOW
+    // =================================================================================
+    let heroIndex = 0;
+    let heroTimer = null;
+    const heroSlides = () => document.querySelectorAll('#heroSlider .slide');
+
+    function showSlide(i) {
+      const slides = heroSlides();
+      if (!slides.length) return;
+      const total = slides.length;
+      heroIndex = (i + total) % total;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === heroIndex));
+      const dots = document.querySelectorAll('#heroSlider .slide-dot');
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === heroIndex));
+    }
+
+    function heroSlide(dir) {
+      showSlide(heroIndex + dir);
+      resetHeroTimer();
+    }
+
+    function resetHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(() => showSlide(heroIndex + 1), 4000);
+    }
+
+    (function initHero() {
+      const slider = document.getElementById('heroSlider');
+      if (!slider) return;
+      const slides = heroSlides();
+      if (!slides.length) return;
+      const dotsWrap = document.getElementById('heroDots');
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = 'slide-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + (idx + 1));
+        dot.onclick = () => { showSlide(idx); resetHeroTimer(); };
+        dotsWrap.appendChild(dot);
+      });
+      showSlide(0);
+      resetHeroTimer();
+    })();
+
+    loadProducts();
+  </script>
+</body>
+</html>

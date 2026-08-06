@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Arrivals â€” TechNest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Webstore.css">
+</head>
+<body>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" onclick="toggleMenu()" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <a href="technest-store.html" onclick="toggleMenu()">Home</a>
+    <a href="new-arrivals.html" onclick="toggleMenu()">New Arrivals</a>
+    <a href="best-sellers.html" onclick="toggleMenu()">Best Sellers</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar-inner">
+      <a href="technest-store.html" class="logo" aria-label="TechNest Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        TechNest
+      </a>
+
+      <div class="nav-links">
+        <a href="shop.html">Shop</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="nav-icons">
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="nav-icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" id="cartBadge">2</span>
+        </button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>New Arrivals</h1>
+      <p>Fresh from our shelves â€” the latest gear we've tested and added to the catalog.</p>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container">
+      <h2 class="section-title">Just dropped</h2>
+      <div class="products-grid" id="productsGrid">
+        <p class="grid-status">Loading products&hellip;</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="new-arrivals.html">New Arrivals</a></li>
+            <li><a href="best-sellers.html">Best Sellers</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 TechNest. All Rights Reserved.</p>
+        <p>Designed with precision.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="webstore.js"></script>
+  <script>
+    function productStatus(stock) {
+      if (stock <= 0) return { label: 'Out of Stock', cls: 'stock-out' };
+      if (stock < 10) return { label: 'Low Stock', cls: 'stock-low' };
+      return { label: 'In Stock', cls: 'stock-in' };
+    }
+
+    function productCard(product) {
+      const status = productStatus(Number(product.stock) || 0);
+      const price = '$' + (Number(product.price) || 0).toFixed(2);
+      const image = product.image
+        ? '<img src="' + product.image + '" alt="' + (product.name || 'Product') + '">'
+        : '<div class="placeholder-img"></div>';
+      const disabled = status.cls === 'stock-out' ? 'disabled' : '';
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<div class="product-image-wrap">' +
+          '<span class="badge ' + status.cls + '">' + status.label + '</span>' +
+          image +
+        '</div>' +
+        '<h3 class="product-name">' + (product.name || 'Product') + '</h3>' +
+        '<div class="product-price">' + price + '</div>' +
+        '<button class="btn-primary" onclick="guardToCheckout()" ' + disabled + '>Shop Now</button>';
+      return card;
+    }
+
+    async function loadProducts() {
+      const grid = document.getElementById('productsGrid');
+      try {
+        const res = await fetch('/api/products');
+        if (!res.ok) throw new Error('Failed to load products');
+        const products = await res.json();
+        const news = products.filter(p => Number(p.is_new) === 1).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        grid.innerHTML = '';
+        if (!news.length) {
+          grid.innerHTML = '<p class="grid-status">No new arrivals yet. Check back soon!</p>';
+          return;
+        }
+        news.forEach(p => grid.appendChild(productCard(p)));
+      } catch (err) {
+        grid.innerHTML = '<p class="grid-status">Could not load products. Please try again later.</p>';
+        console.error('loadProducts', err);
+      }
+    }
+
+    async function guardToCheckout() {
+      try {
+        const res = await fetch('/api/customer/me');
+        if (res.ok) {
+          window.location.href = 'shop.html';
+        } else {
+          window.location.href = 'customer-signup.html';
+        }
+      } catch (err) {
+        window.location.href = 'customer-signup.html';
+      }
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechNest Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0B0B14;
+      color: #E8E6F0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: #151524;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .brand-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, #7C5CFC, #A78BFA);
+      display: flex; align-items: center; justify-content: center; color: white;
+    }
+    .brand-icon svg { width: 22px; height: 22px; }
+    .brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; color: #fff; letter-spacing: -0.02em; }
+    .brand-sub { font-size: 0.8rem; color: #6B6780; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; color: #fff; margin-bottom: 6px; }
+    .sub { color: #9A96AC; font-size: 0.9rem; margin-bottom: 28px; }
+
+    .tabs { display: flex; gap: 6px; background: #0F0F1A; padding: 4px; border-radius: 10px; margin-bottom: 28px; }
+    .tab {
+      flex: 1; padding: 10px; text-align: center; border: none; background: none;
+      color: #9A96AC; font-family: inherit; font-weight: 600; font-size: 0.9rem;
+      border-radius: 8px; cursor: pointer; transition: all 0.15s ease;
+    }
+    .tab.active { background: #7C5CFC; color: #fff; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #9A96AC; margin-bottom: 8px; }
+    .form-group input {
+      width: 100%; padding: 12px 14px;
+      background: #0F0F1A; border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; color: #fff; font-size: 0.95rem; font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .form-group input:focus { border-color: #7C5CFC; box-shadow: 0 0 0 3px rgba(124,92,252,0.25); outline: none; }
+
+    .btn {
+      width: 100%; padding: 12px; border-radius: 10px; border: none;
+      font-family: inherit; font-weight: 600; font-size: 0.95rem; cursor: pointer;
+      background: #7C5CFC; color: #fff; transition: all 0.15s ease;
+    }
+    .btn:hover { background: #6B4FE0; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(124,92,252,0.35); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .error { display: none; background: rgba(239,68,68,0.12); color: #EF4444; border-radius: 10px; padding: 12px 14px; font-size: 0.85rem; margin-bottom: 18px; }
+    .error.show { display: block; }
+    .hint { text-align: center; font-size: 0.75rem; color: #6B6780; margin-top: 20px; }
+    .spinner { display: none; }
+    .btn.loading .spinner {
+      display: inline-block; width: 14px; height: 14px; margin-right: 8px;
+      border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.6s linear infinite; vertical-align: -2px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">TechNest</div>
+        <div class="brand-sub">Admin Console</div>
+      </div>
+    </div>
+
+    <h1 id="title">Welcome back</h1>
+    <p class="sub" id="subtitle">Log in to manage your store.</p>
+
+    <div class="tabs">
+      <button class="tab active" id="tabLogin" onclick="setMode('login')">Log in</button>
+      <button class="tab" id="tabSignup" onclick="setMode('signup')">Sign up</button>
+    </div>
+
+    <div class="error" id="errorBox"></div>
+
+    <form id="authForm" onsubmit="submitForm(event)">
+      <div class="form-group" id="nameGroup">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="e.g. Fortune">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="you@store.com">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required minlength="6" placeholder="At least 6 characters">
+      </div>
+      <div class="form-group" id="keyGroup" style="display:none;">
+        <label for="signupKey">Sign-up Key</label>
+        <input type="text" id="signupKey" placeholder="Required to create an account">
+      </div>
+      <button class="btn" type="submit" id="submitBtn"><span class="spinner"></span><span id="submitText">Log in</span></button>
+    </form>
+
+    <p class="hint">Tip: sign in from the same browser to stay logged in for the day.</p>
+  </div>
+
+  <script>
+    let mode = 'login';
+
+    function setMode(next) {
+      mode = next;
+      document.getElementById('title').textContent = next === 'login' ? 'Welcome back' : 'Create your account';
+      document.getElementById('subtitle').textContent = next === 'login' ? 'Log in to manage your store.' : 'Register to access the admin dashboard.';
+      document.getElementById('nameGroup').style.display = next === 'login' ? 'none' : 'block';
+      document.getElementById('keyGroup').style.display = next === 'login' ? 'none' : 'block';
+      document.getElementById('signupKey').required = next === 'signup';
+      document.getElementById('submitText').textContent = next === 'login' ? 'Log in' : 'Create account';
+      document.getElementById('tabLogin').classList.toggle('active', next === 'login');
+      document.getElementById('tabSignup').classList.toggle('active', next === 'signup');
+      hideError();
+    }
+
+    function showError(msg) {
+      const box = document.getElementById('errorBox');
+      box.textContent = msg;
+      box.classList.add('show');
+    }
+    function hideError() {
+      document.getElementById('errorBox').classList.remove('show');
+    }
+
+    async function submitForm(event) {
+      event.preventDefault();
+      hideError();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.classList.add('loading');
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const name = document.getElementById('name').value.trim();
+      const signupKey = document.getElementById('signupKey').value.trim();
+
+      const endpoint = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
+      const body = mode === 'login'
+        ? { email, password }
+        : { name, email, password, signupKey };
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showError(data.error || 'Something went wrong.');
+          return;
+        }
+        // Logged in successfully — go to the dashboard
+        window.location.href = '/technest-admin-dashboard.html';
+      } catch (err) {
+        showError('Could not reach the server. Is it running?');
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
+    }
+  </script>
+</body>
+</html>

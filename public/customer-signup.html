@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Account â€” TechNest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Webstore.css">
+  <style>
+    .account-hero {
+      background-color: var(--color-bg-dark);
+      background-image:
+        radial-gradient(ellipse 600px 400px at 25% 30%, rgba(124,92,252,0.30) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, #171628 0%, #0b0b14 65%);
+      color: var(--color-text-white);
+      padding: var(--space-3xl) 0 var(--space-2xl);
+      text-align: center;
+    }
+    .account-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-md);
+    }
+    .account-hero p { color: var(--color-text-muted); max-width: 520px; margin: 0 auto; font-size: 1.05rem; }
+
+    .account-section { padding: var(--space-3xl) 0; }
+    .account-single {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .account-card {
+      background: var(--color-bg-light);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .account-tabs {
+      display: flex;
+      gap: 6px;
+      background: var(--color-bg-gray);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: var(--space-lg);
+    }
+    .account-tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      border: none;
+      background: none;
+      color: var(--color-text-gray);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .account-tab:hover { color: var(--color-primary); }
+    .account-tab.active { background: var(--color-primary); color: #fff; }
+    .account-card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+      color: var(--color-text-black);
+    }
+    .account-card > p { color: var(--color-text-gray); font-size: 0.92rem; margin-bottom: var(--space-lg); }
+
+    .form-field { margin-bottom: var(--space-md); }
+    .form-field label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-black);
+      margin-bottom: var(--space-xs);
+    }
+    .form-field input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--color-text-black);
+      background: #fff;
+      transition: all var(--transition-fast);
+    }
+    .form-field input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(124,92,252,0.15);
+    }
+
+    .account-card button[type="submit"] { border: none; cursor: pointer; width: 100%; margin-top: var(--space-sm); font-family: 'Inter', sans-serif; }
+
+    .form-success {
+      display: none;
+      background: rgba(62,214,197,0.12);
+      color: #1B8577;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      margin-bottom: var(--space-md);
+    }
+    .form-success.show { display: block; }
+
+    .form-error {
+      display: none;
+      background: rgba(239,68,68,0.12);
+      color: #DC2626;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      margin-bottom: var(--space-md);
+    }
+    .form-error.show { display: block; }
+
+    .account-links { margin-top: var(--space-lg); font-size: 0.88rem; color: var(--color-text-gray); }
+    .account-links a { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+    .account-links a:hover { text-decoration: underline; }
+
+    .btn-primary[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+    @media (max-width: 768px) {
+      .account-hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" onclick="toggleMenu()" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <a href="technest-store.html" onclick="toggleMenu()">Home</a>
+    <a href="new-arrivals.html" onclick="toggleMenu()">New Arrivals</a>
+    <a href="best-sellers.html" onclick="toggleMenu()">Best Sellers</a>
+    <a href="about.html" onclick="toggleMenu()">About</a>
+    <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar-inner">
+      <a href="technest-store.html" class="logo" aria-label="TechNest Home">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        TechNest
+      </a>
+
+      <div class="nav-links">
+        <a href="shop.html">Shop</a>
+        <a href="new-arrivals.html">New Arrivals</a>
+        <a href="best-sellers.html">Best Sellers</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="nav-icons">
+        <button class="nav-icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+        <button class="nav-icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge" id="cartBadge">2</span>
+        </button>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="account-hero">
+    <div class="container">
+      <h1>Customer Account</h1>
+      <p>Create an account or sign in to start your order.</p>
+    </div>
+  </section>
+
+  <section class="account-section">
+    <div class="container account-single">
+
+      <div class="account-card">
+        <div class="account-tabs">
+          <button type="button" class="account-tab active" id="tabSignup" onclick="setAccountTab('signup')">Create Account</button>
+          <button type="button" class="account-tab" id="tabLogin" onclick="setAccountTab('login')">Sign in</button>
+        </div>
+
+        <div id="signupPanel">
+          <h2>Create your account</h2>
+          <p>New to TechNest? Sign up to continue with your order.</p>
+          <div class="form-success" id="signupSuccess">Account created! Taking you to checkout&hellip;</div>
+          <div class="form-error" id="signupError"></div>
+          <form id="signupForm" onsubmit="handleSignup(event)">
+            <div class="form-field">
+              <label for="sName">Full name</label>
+              <input type="text" id="sName" required placeholder="Jane Doe">
+            </div>
+            <div class="form-field">
+              <label for="sEmail">Email</label>
+              <input type="email" id="sEmail" required placeholder="jane@email.com">
+            </div>
+            <div class="form-field">
+              <label for="sPhone">Phone (optional)</label>
+              <input type="tel" id="sPhone" placeholder="+1 555 123 4567">
+            </div>
+            <div class="form-field">
+              <label for="sPassword">Password</label>
+              <input type="password" id="sPassword" required minlength="6" placeholder="At least 6 characters">
+            </div>
+            <button type="submit" class="btn-primary" id="signupBtn">Create account</button>
+          </form>
+        </div>
+
+        <div id="loginPanel" style="display:none;">
+          <h2>Sign in</h2>
+          <p>Returning customer? Sign in to continue with your order.</p>
+          <div class="form-error" id="loginError"></div>
+          <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-field">
+              <label for="lEmail">Email</label>
+              <input type="email" id="lEmail" required placeholder="jane@email.com">
+            </div>
+            <div class="form-field">
+              <label for="lPassword">Password</label>
+              <input type="password" id="lPassword" required placeholder="Your password">
+            </div>
+            <button type="submit" class="btn-primary" id="loginBtn">Sign in</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="new-arrivals.html">New Arrivals</a></li>
+            <li><a href="best-sellers.html">Best Sellers</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 TechNest. All Rights Reserved.</p>
+        <p>Designed with precision.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="webstore.js"></script>
+  <script>
+    function show(el, msg) {
+      el.textContent = msg || '';
+      el.classList.add('show');
+    }
+    function hide(el) {
+      el.classList.remove('show');
+    }
+
+    function setAccountTab(name) {
+      const signup = name === 'signup';
+      document.getElementById('signupPanel').style.display = signup ? 'block' : 'none';
+      document.getElementById('loginPanel').style.display = signup ? 'none' : 'block';
+      document.getElementById('tabSignup').classList.toggle('active', signup);
+      document.getElementById('tabLogin').classList.toggle('active', !signup);
+    }
+
+    async function handleSignup(event) {
+      event.preventDefault();
+      hide(document.getElementById('signupError'));
+      const btn = document.getElementById('signupBtn');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/customer/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('sName').value.trim(),
+            email: document.getElementById('sEmail').value.trim(),
+            phone: document.getElementById('sPhone').value.trim(),
+            password: document.getElementById('sPassword').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          show(document.getElementById('signupError'), data.error || 'Could not create account.');
+          return;
+        }
+        show(document.getElementById('signupSuccess'));
+        document.getElementById('signupForm').reset();
+        setTimeout(() => { window.location.href = 'shop.html'; }, 1200);
+      } catch (err) {
+        show(document.getElementById('signupError'), 'Could not reach the server.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function handleLogin(event) {
+      event.preventDefault();
+      hide(document.getElementById('loginError'));
+      const btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/customer/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: document.getElementById('lEmail').value.trim(),
+            password: document.getElementById('lPassword').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          show(document.getElementById('loginError'), data.error || 'Could not sign in.');
+          return;
+        }
+        window.location.href = 'shop.html';
+      } catch (err) {
+        show(document.getElementById('loginError'), 'Could not reach the server.');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
