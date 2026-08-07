@@ -257,8 +257,13 @@ app.delete('/api/contact/:id', requireAdmin, async (req, res) => {
   }
 });
 
-// Root: send to the login page (or dashboard if already logged in)
+// Root: send visitors to the main storefront landing page
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'technest-store.html'));
+});
+
+// Admin portal route: http://yourdomain.com/admin
+app.get('/admin', (req, res) => {
   if (req.session && req.session.adminId) {
     return res.redirect('/technest-admin-dashboard.html');
   }
